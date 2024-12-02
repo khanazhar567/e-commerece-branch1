@@ -1,1 +1,1 @@
-"Ipswitch Retail is an eCommerce platform offering a wide range of tech products with a modern and user-friendly interface. Users can browse featured and latest products, view product details, and shop seamlessly online."
+Ipswitch Retail is an eCommerce platform offering a wide range of tech products with a modern and user-friendly interface. Users can browse featured and latest products, view product details, and shop seamlessly online.
