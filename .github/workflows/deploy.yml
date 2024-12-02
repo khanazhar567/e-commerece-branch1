@@ -1,0 +1,38 @@
+name: CI/CD for Static Website
+
+on:
+  push:
+    branches:
+      - master  # Trigger workflow when changes are pushed to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Run the pipeline on the latest Ubuntu environment
+
+    steps:
+    # Step 1: Check out your repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Node.js (optional, for running build tools if needed)
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16 # Use Node.js 16.x (adjust if necessary)
+
+    # Step 3: Install dependencies (skip if no `package.json` is present)
+    - name: Install dependencies
+      run: npm install
+      if: exists('package.json')
+
+    # Step 4: Run a build script (skip if no `package.json` or build script)
+    - name: Build the project
+      run: npm run build
+      if: exists('package.json')
+
+    # Step 5: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub token for authentication
+        publish_dir: ./ # Directory to publish (use `./dist` if a build generates files)
